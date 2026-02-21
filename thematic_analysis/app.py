@@ -15,9 +15,9 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = "uploads"
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-# ===============================
-# Text processing functions
-# ===============================
+
+# --------------Text processing functions-----------------------
+
 def normalize_text(text):
     text = text.lower()
     text = re.sub(r"[^a-z/\s]", " ", text)
@@ -95,9 +95,9 @@ def get_text_column(df):
             return col
     raise ValueError("No text column found.")
 
-# ===============================
-# LLM API call
-# ===============================
+
+# --------------------LLM API call------------------------------
+
 def call_llm(prompt, model):
     LLM_URL = "http://localhost:11434/api/generate" 
     payload = {
@@ -162,9 +162,9 @@ def flatten_subthemes_with_intent(theme_group):
         flattened.append(t)
     return {"themes": flattened}
 
-# ===============================
-# Flask routes
-# ===============================
+
+# ---------------------Flask routes--------------------------
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
@@ -176,21 +176,21 @@ def index():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(filepath)
 
-        # Load Excel
+       
         df = pd.read_excel(filepath)
         df = df.drop_duplicates()
 
-        # Identify text column
+
         text_col = get_text_column(df)
         texts = df[text_col].dropna().astype(str).tolist()
 
-        # Normalize & augment
+
         clean_texts = [normalize_text(t) for t in texts]
         augmented_texts = []
         for t in clean_texts:
             augmented_texts.extend(augment_text(t))
 
-        # Generate themes
+
         themes = generate_themes_with_intent("Dataset", clean_texts, augmented_texts, model)
         themes_flat = flatten_subthemes_with_intent(themes)
 
@@ -200,3 +200,4 @@ def index():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
