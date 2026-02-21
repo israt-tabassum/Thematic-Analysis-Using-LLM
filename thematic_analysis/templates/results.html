@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thematic Analysis Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f8fc;
+        }
+
+        .header {
+            background-color: #1e3c72;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto;
+        }
+
+        .theme-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            border-left: 6px solid #2a5298;
+        }
+
+        .theme-card h2 {
+            margin-top: 0;
+            color: #1e3c72;
+        }
+
+        .intent {
+            background-color: #e8f0fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 18px;
+            background-color: #2a5298;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #1e3c72;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 15px;
+            color: #777;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>Thematic Analysis Results</h1>
+    </div>
+
+    <div class="container">
+        {% for theme in themes.themes %}
+            <div class="theme-card">
+                <h2>Parent Theme: {{ theme.theme_name }}</h2>
+
+                <div class="intent">
+                    <strong>Intent:</strong> {{ theme.intent }}
+                </div>
+
+                <ul>
+                    {% for sub in theme.subthemes %}
+                        <li>{{ sub }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+
+        <a class="back-button" href="{{ url_for('index') }}">← Back to Dashboard</a>
+    </div>
+
+    <div class="footer">
+         NTNU -  Intelligent Systems and Analytics
+    </div>
+
+</body>
+</html>

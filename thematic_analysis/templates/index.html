@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LLM Thematic Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            color: #2a5298;
+            font-size: 22px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 18px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #2a5298;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #1e3c72;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Thematic Analysis Using LLM</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            <label>Upload Excel File</label>
+            <input type="file" name="file" required>
+
+            <label>Select LLM Model</label>
+            <select name="llm_model" required>
+                <option value="" disabled selected>Select</option>
+                <option value="llama3">LLaMA 3</option>
+                <option value="gemma">Gemma</option>
+                <option value="mistral:7b">Mistral 7B</option>
+                <option value="phi">Phi</option>
+            </select>
+
+            <input type="submit" value="Run Thematic Analysis">
+        </form>
+
+        <div class="footer">
+            NTNU -  Intelligent Systems and Analytics
+        </div>
+    </div>
+</body>
+</html>
